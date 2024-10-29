@@ -14,6 +14,9 @@ import pieces.*;
  *
  * @author Jorge Aguirre
  */
+
+//JORGE AGUIRRE 22341189
+
 public class Board extends JPanel {
     
     public int tileSize = 75;
