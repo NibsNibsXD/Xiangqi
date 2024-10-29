@@ -22,9 +22,14 @@ public class Board extends JPanel {
     int cols = 9;
     
     ArrayList<Piece> pieceList = new ArrayList<>();
+    ArrayList<Piece> capturedBlackPieces = new ArrayList<>();
+    ArrayList<Piece> capturedRedPieces = new ArrayList<>();
     
     public Board(){
-        this.setPreferredSize(new Dimension(cols * tileSize, rows * tileSize));
+        int extraCols = 2; 
+        this.setPreferredSize(new Dimension((cols + extraCols) * tileSize, rows * tileSize));
+        this.capturedBlackPanel = capturedBlackPanel;
+        this.capturedRedPanel = capturedRedPanel;
         
         this.addMouseListener(input);
         this.addMouseMotionListener(input);
@@ -34,20 +39,25 @@ public class Board extends JPanel {
         
     }
     
+    
+    public int redWinsCounter = 0;
+    public int blackWinsCounter = 0;
+    
+    private boolean isRedTurn = true;
+    private boolean isGameOver = false;
+    
+    private JPanel capturedBlackPanel;
+    private JPanel capturedRedPanel;
+    
+    
+    
     @Override
     public void paintComponent(Graphics g){
         Graphics2D graphics2d = (Graphics2D) g;
-        
-        for(int r = 0; r < rows; r++ ){
-            for(int c = 0; c < cols; c++){
-                graphics2d.setColor(((((r == 0) || (r == 1))||(r == 2)) && (((c ==3) || (c == 4))||(c == 5)) || (((r == 10) || (r == 9))||(r == 8)) && (((c ==3) || (c == 4))||(c == 5)) ) ?  
-                        //ESTA PARTE ES PARA EL CUANDRANTE 3X3 EN ROW 0,1,2,8,9,10 CON COLUMNAS 3,4,5 PARA EL REY
-                        (((c+r)%2 == 0) ? Color.MAGENTA : Color.CYAN) :((c+r)%2 == 0) & r != 5 ? Color.WHITE : (r == 5) ? Color.BLUE :  Color.BLACK);
-                        //ESTE ES EL RELLENO DEL RESTO DEL TABLERO
-                graphics2d.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
-            }
-        }
-        
+
+        // Llamada al método recursivo
+        drawTiles(graphics2d, 0, 0);
+
         if(selectedPiece != null){
             for(int r = 0; r < rows; r++ ){
                 for(int c = 0; c < cols; c++){
@@ -59,14 +69,36 @@ public class Board extends JPanel {
                 }
             }
         }
-        
-        
-        
+
         for(Piece piece : pieceList){
             piece.paint(graphics2d);
         }
-        
     }
+
+    // Método RECURSIVO
+    private void drawTiles(Graphics2D graphics2d, int r, int c) {
+        if(r >= rows) {
+            return; //se han procesado todas las filas
+        }
+        if(c >= cols) {
+            // Se ha completado la fila actual y pasa a la siguiente
+            drawTiles(graphics2d, r + 1, 0);
+            return;
+        }
+
+        graphics2d.setColor(
+            ((((r == 0) || (r == 1)) || (r == 2)) && (((c == 3) || (c == 4)) || (c == 5)) ||
+            (((r == 10) || (r == 9)) || (r == 8)) && (((c == 3) || (c == 4)) || (c == 5))) ?  
+                (((c + r) % 2 == 0) ? Color.MAGENTA : Color.CYAN) :
+                ((c + r) % 2 == 0) & r != 5 ? Color.WHITE : (r == 5) ? Color.BLUE :  Color.BLACK
+        );
+        //relleno a los cuadrados del tablero
+        graphics2d.fillRect(c * tileSize, r * tileSize, tileSize, tileSize);
+
+        // Llamada recursiva para la siguiente columna
+        drawTiles(graphics2d, r, c + 1);
+    }
+    
     
     public Piece selectedPiece;
     
@@ -74,8 +106,9 @@ public class Board extends JPanel {
     
     Input input = new Input(this);
     
+    CheckScanner checkScanner = new CheckScanner(this);
     
-    public void addPiece(){
+    public final void addPiece(){
         //Elefantes negros
         pieceList.add(new Elephant(this, 2, 0, false));
         pieceList.add(new Elephant(this, 6, 0, false));
@@ -145,6 +178,14 @@ public class Board extends JPanel {
     
     public boolean isValidMove(Move move){
         
+        if(isGameOver){
+            return false;
+        }
+        
+        if(move.piece.isRed  != isRedTurn){
+            return false;
+        }
+        
         if(sameTeam(move.piece, move.capture)){
             return false;
         }
@@ -155,6 +196,9 @@ public class Board extends JPanel {
             return false;
         }
         if(move.piece.moveCollision(move.newCol, move.newRow)){
+            return false;
+        }
+        if(checkScanner.isKingChecked(move)){
             return false;
         }
         
@@ -168,6 +212,19 @@ public class Board extends JPanel {
         return player1.isRed == player2.isRed;
     }
     
+    private void updateGameState(){
+        Piece king = findKing(isRedTurn);
+        
+        if(checkScanner.isGameOver(king) && isRedTurn){
+            blackWinsCounter+= 3;
+            //player win points de : winPoints de clase player
+            
+        }
+        if(checkScanner.isGameOver(king) && !isRedTurn){
+            redWinsCounter+= 3;
+        }
+        isGameOver = true;
+    }
     
     
     public void makeMove(Move move){
@@ -177,12 +234,30 @@ public class Board extends JPanel {
         move.piece.ypos = move.newRow * tileSize;
         
         capture(move);
+        
+        isRedTurn = !isRedTurn;
+        
+        
     }
     
     public void capture(Move move){
-        pieceList.remove(move.capture);
+      if (move.capture != null) {
+          pieceList.remove(move.capture);
+          if (move.capture.isRed) {
+              capturedRedPieces.add(move.capture);
+          } else {
+              capturedBlackPieces.add(move.capture);
+          }
+      }
+  }
+    
+    Piece findKing(boolean isRed){
+        for(Piece piece : pieceList){
+            if(isRed == piece.isRed && piece.name.equals("King")){
+                return piece;
+            }
+        }
+        return null;
     }
-    
-    
     
 }

@@ -11,7 +11,7 @@ import xianquiproyectop2q4.Board;
  *
  * @author Jorge Aguirre
  */
-public class Pawn extends Piece{
+public class Pawn extends Piece implements Movable{
     
     private boolean overRiver;
     public Pawn(Board board, int col, int row, boolean isRed){

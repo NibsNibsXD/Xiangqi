@@ -3,15 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/xianquiproyectop2q4/Move.java</file>
+            <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/pieces/Pawn.java</file>
+            <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/xianquiproyectop2q4/CheckScanner.java</file>
             <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/pieces/Piece.java</file>
             <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/xianquiproyectop2q4/Board.java</file>
             <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/pieces/Cannon.java</file>
-            <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/pieces/Rook.java</file>
             <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/Resources/pieces.png</file>
-            <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/pieces/Advisor.java</file>
-            <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/pieces/King.java</file>
             <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/pieces/Knight.java</file>
+            <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/xianquiproyectop2q4/Move.java</file>
+            <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/pieces/Rook.java</file>
+            <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/pieces/King.java</file>
             <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/pieces/Elephant.java</file>
             <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/xianquiproyectop2q4/XianquiProyectoP2Q4.java</file>
             <file>file:/C:/Users/Jorge%20Aguirre/Documents/NetBeansProjects/XianquiProyectoP2Q4/src/xianquiproyectop2q4/Input.java</file>

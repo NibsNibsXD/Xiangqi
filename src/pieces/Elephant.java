@@ -12,7 +12,7 @@ import xianquiproyectop2q4.Board;
  * @author Jorge Aguirre
  */
 
-public class Elephant extends Piece  {
+public class Elephant extends Piece implements Movable {
     
     public Elephant(Board board, int col, int row, boolean isRed) {
         super(board);
@@ -33,7 +33,7 @@ public class Elephant extends Piece  {
             return false;
         }
         
-        return Math.abs(this.col - col) == Math.abs(this.row -row) && !((Math.abs(this.col - col) > 2)&& Math.abs(this.row - row) > 2 );
+        return Math.abs(this.col - col) == Math.abs(this.row -row) && ((Math.abs(this.col - col) == 2)&& Math.abs(this.row - row) == 2 ) ;
     }
     
     

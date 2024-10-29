@@ -15,7 +15,7 @@ import xianquiproyectop2q4.Board;
  *
  * @author Jorge Aguirre
  */
-public class Piece {
+public abstract class Piece  {
     
     public int col, row, xpos, ypos;
     public boolean isRed;
@@ -39,6 +39,8 @@ public class Piece {
     public Piece(Board board){
         this.board = board;
     }
+    
+    
     
     
     //testing

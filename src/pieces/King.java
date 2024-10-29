@@ -11,7 +11,7 @@ import xianquiproyectop2q4.Board;
  *
  * @author Jorge Aguirre
  */
-public class King extends Piece {
+public class King extends Piece implements Movable {
     
     public King(Board board, int col, int row, boolean isRed){
         super(board);
@@ -28,7 +28,7 @@ public class King extends Piece {
     
     public boolean isValidMovePiece(int col, int row){
         if((((row == 0) || (row == 1))||(row == 2)) && (((col ==3) || (col == 4))||(col == 5)) || (((row == 10) || (row == 9))||(row == 8)) && (((col ==3) || (col == 4))||(col == 5)) ){
-            return Math.abs((col - this.col) * Math.abs(row - this.row)) == 1 || Math.abs(col - this.col) + Math.abs(row -this.row) == 1;
+            return (Math.abs((col - this.col) * Math.abs(row - this.row)) == 1 || Math.abs(col - this.col) + Math.abs(row -this.row) == 1) && !(Math.abs(this.col - col) == Math.abs(this.row -row) && !((Math.abs(this.col - col) > 1)&& Math.abs(this.row - row) > 1 ));
         }
         return false;
     }

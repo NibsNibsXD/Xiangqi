@@ -11,7 +11,7 @@ import xianquiproyectop2q4.Board;
  *
  * @author Jorge Aguirre
  */
-public class Knight extends Piece {
+public class Knight extends Piece implements Movable {
     
     public Knight(Board board, int col, int row, boolean isRed){
         super(board);
@@ -27,6 +27,7 @@ public class Knight extends Piece {
     }
     
     
+    @Override
     public boolean isValidMovePiece(int col, int row){
         if((this.row == 4 || this.row == 3 || this.row == 6 || this.row == 7) && (row == 4 || row == 3 || row == 6 || row == 7)){
             return ((Math.abs(col - this.col)* Math.abs(row - this.row)) == 3 );
@@ -34,6 +35,7 @@ public class Knight extends Piece {
         return ((Math.abs(col - this.col)* Math.abs(row - this.row)) == 2 ) ; 
     }
     
+    @Override
     public boolean moveCollision(int col, int row){
         
         // revisando arriba

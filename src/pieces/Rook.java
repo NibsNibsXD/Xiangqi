@@ -11,7 +11,7 @@ import xianquiproyectop2q4.Board;
  *
  * @author Jorge Aguirre
  */
-public class Rook extends Piece  {
+public class Rook extends Piece implements Movable {
     
     public Rook(Board board, int col, int row, boolean isRed) {
         super(board);
